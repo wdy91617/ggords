@@ -1,0 +1,122 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+    toc: true
+    toc_depth: 2
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-",
+  dev = "png"
+  
+)
+```
+
+ ggords
+========
+
+The package provides six functions: `ggpca()`, `ggca()`, `ggpcoa()`, `ggnmds()`, `ggrda()`, `ggcca()`.
+You can customize the display labels and themes. Labels can contain formulas. Image themes can be set by themes in ggplots or by other packages(ggthemr).
+
+ Installation
+------------
+
+```{r eval=FALSE}
+library(devtools)
+install_github("wdy91617/ggords")
+```
+
+ Example Usage
+-------------
+
+
+```{r }
+library(ggords)
+require(vegan)
+require(ggplot2)
+data(Envs)
+
+```
+### get group factor
+
+```{r} 
+
+Env.w <- hclust(dist(scale(Envs)), "ward.D")
+gr <- cutree(Env.w , k=4)
+grl <- factor(gr)
+```
+### Compute PCA
+
+```{r} 
+Env.pca <- rda(Envs,scale = TRUE)
+#head(summary(Env.pca))
+```
+
+### Produce a plot 
+
+```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
+ggpca(Env.pca)
+
+```
+
+### Add a group
+
+```{r fig.width=5, fig.height=4.5, fig.align = "center"}  
+ggpca(Env.pca, group = grl) 
+
+```
+
+### Set a theme 
+
+```{r fig.width=5, fig.height=4.5, fig.align = "center"}  
+ggpca(Env.pca, group = grl, spacol = "white") + theme_dark()
+
+```
+
+### Set a theme (use ggthemr packages, more themes in ggthemer)
+
+```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
+library(ggthemr)#[](https://github.com/cttobin/ggthemr)
+
+chalk_theme <- ggthemr('chalk', set_theme = FALSE)
+fd_theme <- ggthemr('flat dark', set_theme = FALSE)
+
+p <- ggpca(Env.pca, group = grl, spacol = "white")
+p + chalk_theme$theme
+p + fd_theme$theme
+```
+
+## Remove the arrow
+
+```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
+ggpca(Env.pca, group = grl, spearrow = NULL)
+```
+
+## Modify legend title, group color and point shape
+
+```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
+ggpca(Env.pca, group = grl, spearrow = NULL) + 
+  scale_color_manual(name = "Groups",values = c("red2", "purple1", "grey20","cyan")) +
+  scale_shape_manual(name = "Groups",values = c(8,15,16,17))
+
+```
+
+##Add confidence ellipses
+
+```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
+ggpca(Env.pca, group = grl, spearrow = NULL, ellipse = TRUE) +
+  scale_colour_hue(l = 70, c = 300)
+
+```
+
+
+
+License
+-------
+Released under GPL-3.

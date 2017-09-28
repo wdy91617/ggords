@@ -1,0 +1,89 @@
+---
+title: "ggcca examples"
+author: "wdy"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 5, fig.height = 4.5, fig.align = "center")
+```
+
+```{r}
+library(ggords)
+require(vegan)
+require(ggplot2)
+data(Spes)
+data(Envs)
+```
+##get group factor
+
+```{r}
+Spe.w <- hclust(dist(scale(Spes)), "ward.D")
+gr <- cutree(Spe.w , k=4)
+grl <- factor(gr)
+```
+## Compute CCA
+
+```{r} 
+Spe.cca <- cca(Spes, Envs) 
+#head(summary(Spe.cca))
+```
+
+## Produce a plot 
+
+```{r} 
+ggcca(Spe.cca)
+```
+
+## Add a group
+
+```{r} 
+ggcca(Spe.cca, group = grl) 
+```
+
+## Set a theme 
+
+```{r} 
+
+ggcca(Spe.cca, group = grl, spacol = "white") + theme_dark()
+```
+
+
+## Set a theme (use ggthemr packages, more themes in ggthemer)
+
+```{r} 
+# 
+# library(ggthemr)#https://github.com/cttobin/ggthemr
+# chalk_theme <- ggthemr('chalk', set_theme = FALSE)  
+# fd_theme <- ggthemr('flat dark', set_theme = FALSE)  
+# p <- ggcca(Spe.cca, group = grl, spacol = "white") 
+# p + chalk_theme$theme
+# p + fd_theme$theme
+```
+
+
+## Remove the arrow
+
+```{r} 
+ggcca(Spe.cca, group = grl, spearrow = NULL)
+```
+
+## Modify legend title, group color and point shape
+
+```{r} 
+ggcca(Spe.cca, group = grl, spearrow = NULL) + 
+  scale_color_manual(name = "Groups",values = c("red2", "purple1", "grey20","cyan")) +
+  scale_shape_manual(name = "Groups",values = c(8,15,16,17))
+```
+
+##Add confidence ellipses
+
+```{r} 
+ggcca(Spe.cca, group = grl, spearrow = NULL, ellipse = TRUE) +
+  scale_colour_hue(l = 70, c = 300)
+```
