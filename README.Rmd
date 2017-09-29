@@ -18,22 +18,19 @@ knitr::opts_chunk$set(
 )
 ```
 
- ggords
-========
+# ggords
 
 The package provides six functions: `ggpca()`, `ggca()`, `ggpcoa()`, `ggnmds()`, `ggrda()`, `ggcca()`.
 You can customize the display labels and themes. Labels can contain formulas. Image themes can be set by themes in ggplots or by other packages(ggthemr).
 
- Installation
-------------
+## Installation
 
 ```{r eval=FALSE}
 library(devtools)
 install_github("wdy91617/ggords")
 ```
 
- Example Usage
--------------
+## Example Usage
 
 
 ```{r }
@@ -52,8 +49,8 @@ Env.w <- hclust(dist(scale(Envs)), "ward.D")
 gr <- cutree(Env.w , k=4)
 grl <- factor(gr)
 ```
-------------------------------------------------------------------------------------------------
- ggpca
+
+## ggpca
 
 ### Compute PCA
 
@@ -96,13 +93,13 @@ p + chalk_theme$theme
 p + fd_theme$theme
 ```
 
-## Remove the arrow
+### Remove the arrow
 
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
 ggpca(Env.pca, group = grl, spearrow = NULL)
 ```
 
-## Modify legend title, group color and point shape
+### Modify legend title, group color and point shape
 
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
 ggpca(Env.pca, group = grl, spearrow = NULL) + 
@@ -111,7 +108,7 @@ ggpca(Env.pca, group = grl, spearrow = NULL) +
 
 ```
 
-## Add confidence ellipses
+### Add confidence ellipses
 
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
 ggpca(Env.pca, group = grl, spearrow = NULL, ellipse = TRUE) +
@@ -120,35 +117,35 @@ ggpca(Env.pca, group = grl, spearrow = NULL, ellipse = TRUE) +
 ```
 ------------------------------------------------------------------------------------------------
 
- ggpnmds
+## ggpnmds
 
-## Compute NMDS
+### Compute NMDS
 
 ```{r} 
 Env.nmds <- metaMDS(Envs, distance="bray")
 #head(summary(Env.nmds))
 ```
 
-## Produce a plot 
+### Produce a plot 
 
 ```{r} 
 ggnmds(Env.nmds)
 ```
 
-## Add a group
+### Add a group
 
 ```{r} 
 ggnmds(Env.nmds, group = grl) 
 ```
 
-## Set a theme 
+### Set a theme 
 
 ```{r} 
 ggnmds(Env.nmds, group = grl, spacol = "white") + theme_dark()
 
 ```
 
-## Set a theme (use ggthemr packages, more themes in ggthemer)
+### Set a theme (use ggthemr packages, more themes in ggthemer)
 [](https://github.com/cttobin/ggthemr)
 
 ```{r} 
@@ -164,13 +161,13 @@ p + fd_theme$theme
 ```
 
 
-## Remove the arrow
+### Remove the arrow
 
 ```{r} 
 ggnmds(Env.nmds, group = grl, spearrow = NULL)
 ```
 
-## Set labels
+### Set labels
 
 ```{r} 
 mlabs<-c("NH[4]^{`+`}" , "NO[3]^{`-`}" ,"delta^13*C","A[1]","sqrt(2*pi)","frac(x^2,2)",
@@ -179,7 +176,7 @@ mlabs<-c("NH[4]^{`+`}" , "NO[3]^{`-`}" ,"delta^13*C","A[1]","sqrt(2*pi)","frac(x
 ggnmds(Env.nmds, group = grl, spearrow = NULL, msplabs = mlabs)
 ```
 
-## Modify legend title, group color and point shape
+### Modify legend title, group color and point shape
 
 ```{r} 
 ggnmds(Env.nmds, group = grl, spearrow = NULL) + 
@@ -187,7 +184,7 @@ ggnmds(Env.nmds, group = grl, spearrow = NULL) +
   scale_shape_manual(name = "Groups",values = c(8,15,16,17))
 ```
 
-## Add confidence ellipses
+### Add confidence ellipses
 
 ```{r} 
 ggnmds(Env.nmds, group = grl, spearrow = NULL, ellipse = TRUE) +
