@@ -1,13 +1,13 @@
--   [ggords](#ggords)
+-   [**ggords**](#ggords)
     -   [Installation](#installation)
     -   [Example Usage](#example-usage)
-    -   [ggpca](#ggpca)
-    -   [ggpnmds](#ggpnmds)
+    -   [**ggpca**](#ggpca)
+    -   [**ggpnmds**](#ggpnmds)
     -   [License](#license)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-ggords
-======
+**ggords**
+==========
 
 The package provides six functions: `ggpca()`, `ggca()`, `ggpcoa()`, `ggnmds()`, `ggrda()`, `ggcca()`. You can customize the display labels and themes. Labels can contain formulas. Image themes can be set by themes in ggplots or by other packages(ggthemr).
 
@@ -34,10 +34,12 @@ require(ggplot2)
 data(Envs)
 ```
 
-ggpca
------
+------------------------------------------------------------------------
 
--   get group factor
+**ggpca**
+---------
+
+1.  get group factor
 
 ``` r
 
@@ -46,14 +48,14 @@ gr <- cutree(Env.w , k=4)
 grl <- factor(gr)
 ```
 
--   Compute PCA
+1.  Compute PCA
 
 ``` r
 Env.pca <- rda(Envs,scale = TRUE)
 #head(summary(Env.pca))
 ```
 
--   Produce a plot
+1.  Produce a plot
 
 ``` r
 ggpca(Env.pca)
@@ -122,10 +124,10 @@ ggpca(Env.pca, group = grl, spearrow = NULL, ellipse = TRUE) +
   scale_colour_hue(l = 70, c = 300)
 ```
 
-<img src="README-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
+<img src="README-unnamed-chunk-12-1.png" style="display: block; margin: auto;" /> \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 
-ggpnmds
--------
+**ggpnmds**
+-----------
 
 -   Compute NMDS
 
@@ -134,62 +136,57 @@ Env.nmds <- metaMDS(Envs, distance="bray")
 #> Square root transformation
 #> Wisconsin double standardization
 #> Run 0 stress 0.04321381 
-#> Run 1 stress 0.0432161 
-#> ... Procrustes: rmse 0.0009768189  max resid 0.004553941 
+#> Run 1 stress 0.04321485 
+#> ... Procrustes: rmse 0.00078967  max resid 0.003684506 
 #> ... Similar to previous best
-#> Run 2 stress 0.04321577 
-#> ... Procrustes: rmse 0.0003105869  max resid 0.001437191 
+#> Run 2 stress 0.04321434 
+#> ... Procrustes: rmse 0.000148537  max resid 0.0006890069 
 #> ... Similar to previous best
-#> Run 3 stress 0.04321513 
-#> ... Procrustes: rmse 0.0002243168  max resid 0.001024746 
+#> Run 3 stress 0.043215 
+#> ... Procrustes: rmse 0.0008034782  max resid 0.003677543 
 #> ... Similar to previous best
-#> Run 4 stress 0.04321509 
-#> ... Procrustes: rmse 0.0008341996  max resid 0.003897355 
+#> Run 4 stress 0.04321411 
+#> ... Procrustes: rmse 0.0006457844  max resid 0.003011902 
 #> ... Similar to previous best
-#> Run 5 stress 0.04321436 
-#> ... Procrustes: rmse 0.0001435139  max resid 0.0006648939 
+#> Run 5 stress 0.04321542 
+#> ... Procrustes: rmse 0.0003350677  max resid 0.001561671 
 #> ... Similar to previous best
-#> Run 6 stress 0.04321474 
-#> ... Procrustes: rmse 0.0002100922  max resid 0.0009694395 
+#> Run 6 stress 0.04321395 
+#> ... Procrustes: rmse 0.0005693296  max resid 0.002655009 
 #> ... Similar to previous best
-#> Run 7 stress 0.04321559 
-#> ... Procrustes: rmse 0.0009094767  max resid 0.004242458 
+#> Run 7 stress 0.06230615 
+#> Run 8 stress 0.04321455 
+#> ... Procrustes: rmse 0.0007211992  max resid 0.003345816 
 #> ... Similar to previous best
-#> Run 8 stress 0.04321381 
-#> ... Procrustes: rmse 2.116557e-05  max resid 7.794265e-05 
+#> Run 9 stress 0.07681689 
+#> Run 10 stress 0.07029498 
+#> Run 11 stress 0.04321583 
+#> ... Procrustes: rmse 0.0009427922  max resid 0.004399741 
 #> ... Similar to previous best
-#> Run 9 stress 0.04321479 
-#> ... Procrustes: rmse 0.000232526  max resid 0.001079938 
+#> Run 12 stress 0.04321398 
+#> ... Procrustes: rmse 4.338954e-05  max resid 0.000164707 
 #> ... Similar to previous best
-#> Run 10 stress 0.04321607 
-#> ... Procrustes: rmse 0.0009703773  max resid 0.004526845 
+#> Run 13 stress 0.04321499 
+#> ... Procrustes: rmse 0.0008163096  max resid 0.003791112 
 #> ... Similar to previous best
-#> Run 11 stress 0.04321617 
-#> ... Procrustes: rmse 0.000968435  max resid 0.004518191 
+#> Run 14 stress 0.043214 
+#> ... Procrustes: rmse 0.0006194595  max resid 0.002890801 
 #> ... Similar to previous best
-#> Run 12 stress 0.04321517 
-#> ... Procrustes: rmse 0.0008287413  max resid 0.003866713 
+#> Run 15 stress 0.06230502 
+#> Run 16 stress 0.04321347 
+#> ... New best solution
+#> ... Procrustes: rmse 0.0004247602  max resid 0.001980023 
 #> ... Similar to previous best
-#> Run 13 stress 0.04321596 
-#> ... Procrustes: rmse 0.0009573606  max resid 0.004466765 
+#> Run 17 stress 0.04321623 
+#> ... Procrustes: rmse 0.0005637102  max resid 0.002626748 
 #> ... Similar to previous best
-#> Run 14 stress 0.04321559 
-#> ... Procrustes: rmse 0.0003508798  max resid 0.00164377 
+#> Run 18 stress 0.0432139 
+#> ... Procrustes: rmse 0.0001639923  max resid 0.0007590241 
 #> ... Similar to previous best
-#> Run 15 stress 0.04321579 
-#> ... Procrustes: rmse 0.0003862913  max resid 0.001800007 
+#> Run 19 stress 0.04321388 
+#> ... Procrustes: rmse 0.0004587616  max resid 0.002139769 
 #> ... Similar to previous best
-#> Run 16 stress 0.06230747 
-#> Run 17 stress 0.04321492 
-#> ... Procrustes: rmse 0.0002574282  max resid 0.001197316 
-#> ... Similar to previous best
-#> Run 18 stress 0.04321539 
-#> ... Procrustes: rmse 0.0003059636  max resid 0.001416406 
-#> ... Similar to previous best
-#> Run 19 stress 0.07052911 
-#> Run 20 stress 0.04321547 
-#> ... Procrustes: rmse 0.0003354284  max resid 0.001559937 
-#> ... Similar to previous best
+#> Run 20 stress 0.06230519 
 #> *** Solution reached
 #head(summary(Env.nmds))
 ```

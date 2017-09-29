@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ggords
+# **ggords**
 
 The package provides six functions: `ggpca()`, `ggca()`, `ggpcoa()`, `ggnmds()`, `ggrda()`, `ggcca()`.
 You can customize the display labels and themes. Labels can contain formulas. Image themes can be set by themes in ggplots or by other packages(ggthemr).
@@ -40,9 +40,10 @@ require(ggplot2)
 data(Envs)
 
 ```
-## ggpca
+*************************************************************************************************************
+## **ggpca**
 
-* get group factor
+1. get group factor
 
 ```{r} 
 
@@ -52,14 +53,14 @@ grl <- factor(gr)
 ```
 
 
-* Compute PCA
+2. Compute PCA
 
 ```{r} 
 Env.pca <- rda(Envs,scale = TRUE)
 #head(summary(Env.pca))
 ```
 
-* Produce a plot 
+3. Produce a plot 
 
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
 ggpca(Env.pca)
@@ -115,9 +116,9 @@ ggpca(Env.pca, group = grl, spearrow = NULL, ellipse = TRUE) +
   scale_colour_hue(l = 70, c = 300)
 
 ```
+*************************************************************************************************************
 
-
-## ggpnmds
+## **ggpnmds**
 
 * Compute NMDS
 
