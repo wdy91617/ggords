@@ -1,19 +1,15 @@
 -   [ggords](#ggords)
     -   [Installation](#installation)
     -   [Example Usage](#example-usage)
+    -   [Compute NMDS](#compute-nmds)
+    -   [Produce a plot](#produce-a-plot)
+    -   [Add a group](#add-a-group)
+    -   [Set a theme](#set-a-theme)
+    -   [Set a theme (use ggthemr packages, more themes in ggthemer)](#set-a-theme-use-ggthemr-packages-more-themes-in-ggthemer)
     -   [Remove the arrow](#remove-the-arrow)
+    -   [Set labels](#set-labels)
     -   [Modify legend title, group color and point shape](#modify-legend-title-group-color-and-point-shape)
     -   [Add confidence ellipses](#add-confidence-ellipses)
-    -   [<img src="README-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />](#section)
-    -   [Compute NMDS](#compute-nmds)
-    -   [Produce a plot](#produce-a-plot-1)
-    -   [Add a group](#add-a-group-1)
-    -   [Set a theme](#set-a-theme-1)
-    -   [Set a theme (use ggthemr packages, more themes in ggthemer)](#set-a-theme-use-ggthemr-packages-more-themes-in-ggthemer-1)
-    -   [Remove the arrow](#remove-the-arrow-1)
-    -   [Set labels](#set-labels)
-    -   [Modify legend title, group color and point shape](#modify-legend-title-group-color-and-point-shape-1)
-    -   [Add confidence ellipses](#add-confidence-ellipses-1)
     -   [License](#license)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -54,95 +50,99 @@ gr <- cutree(Env.w , k=4)
 grl <- factor(gr)
 ```
 
-==ggpca==
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="center">ggpca</td>
+</tr>
+<tr class="even">
+<td align="center">### Compute PCA</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>r Env.pca &lt;- rda(Envs,scale = TRUE) #head(summary(Env.pca))</code></td>
+</tr>
+<tr class="even">
+<td align="center">### Produce a plot</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>r ggpca(Env.pca)</code></td>
+</tr>
+<tr class="even">
+<td align="center"><img src="README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" /></td>
+</tr>
+<tr class="odd">
+<td align="center">### Add a group</td>
+</tr>
+<tr class="even">
+<td align="center"><code>r ggpca(Env.pca, group = grl)</code></td>
+</tr>
+<tr class="odd">
+<td align="center"><img src="README-unnamed-chunk-7-1.png" style="display: block; margin: auto;" /></td>
+</tr>
+<tr class="even">
+<td align="center">### Set a theme</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>r ggpca(Env.pca, group = grl, spacol = &quot;white&quot;) + theme_dark()</code></td>
+</tr>
+<tr class="even">
+<td align="center"><img src="README-unnamed-chunk-8-1.png" style="display: block; margin: auto;" /></td>
+</tr>
+<tr class="odd">
+<td align="center">### Set a theme (use ggthemr packages, more themes in ggthemer) <a href="https://github.com/cttobin/ggthemr"></a></td>
+</tr>
+<tr class="even">
+<td align="center">```r library(ggthemr)</td>
+</tr>
+<tr class="odd">
+<td align="center">chalk_theme &lt;- ggthemr('chalk', set_theme = FALSE) fd_theme &lt;- ggthemr('flat dark', set_theme = FALSE)</td>
+</tr>
+<tr class="even">
+<td align="center">p &lt;- ggpca(Env.pca, group = grl, spacol = &quot;white&quot;) p + chalk_theme$theme ```</td>
+</tr>
+<tr class="odd">
+<td align="center"><img src="README-unnamed-chunk-9-1.png" style="display: block; margin: auto;" /></td>
+</tr>
+<tr class="even">
+<td align="center"><code>r p + fd_theme$theme</code></td>
+</tr>
+<tr class="odd">
+<td align="center"><img src="README-unnamed-chunk-9-2.png" style="display: block; margin: auto;" /></td>
+</tr>
+<tr class="even">
+<td align="center">## Remove the arrow</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>r ggpca(Env.pca, group = grl, spearrow = NULL)</code></td>
+</tr>
+<tr class="even">
+<td align="center"><img src="README-unnamed-chunk-10-1.png" style="display: block; margin: auto;" /></td>
+</tr>
+<tr class="odd">
+<td align="center">## Modify legend title, group color and point shape</td>
+</tr>
+<tr class="even">
+<td align="center"><code>r ggpca(Env.pca, group = grl, spearrow = NULL) + scale_color_manual(name = &quot;Groups&quot;,values = c(&quot;red2&quot;, &quot;purple1&quot;, &quot;grey20&quot;,&quot;cyan&quot;)) + scale_shape_manual(name = &quot;Groups&quot;,values = c(8,15,16,17))</code></td>
+</tr>
+<tr class="odd">
+<td align="center"><img src="README-unnamed-chunk-11-1.png" style="display: block; margin: auto;" /></td>
+</tr>
+<tr class="even">
+<td align="center">## Add confidence ellipses</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>r ggpca(Env.pca, group = grl, spearrow = NULL, ellipse = TRUE) + scale_colour_hue(l = 70, c = 300)</code></td>
+</tr>
+<tr class="even">
+<td align="center"><img src="README-unnamed-chunk-12-1.png" style="display: block; margin: auto;" /></td>
+</tr>
+</tbody>
+</table>
 
-### Compute PCA
-
-``` r
-Env.pca <- rda(Envs,scale = TRUE)
-#head(summary(Env.pca))
-```
-
-### Produce a plot
-
-``` r
-ggpca(Env.pca)
-```
-
-<img src="README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
-
-### Add a group
-
-``` r
-ggpca(Env.pca, group = grl) 
-```
-
-<img src="README-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
-
-### Set a theme
-
-``` r
-ggpca(Env.pca, group = grl, spacol = "white") + theme_dark()
-```
-
-<img src="README-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
-
-### Set a theme (use ggthemr packages, more themes in ggthemer)
-
-[](https://github.com/cttobin/ggthemr)
-
-``` r
-library(ggthemr)
-
-chalk_theme <- ggthemr('chalk', set_theme = FALSE)
-fd_theme <- ggthemr('flat dark', set_theme = FALSE)
-
-p <- ggpca(Env.pca, group = grl, spacol = "white")
-p + chalk_theme$theme
-```
-
-<img src="README-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
-
-``` r
-p + fd_theme$theme
-```
-
-<img src="README-unnamed-chunk-9-2.png" style="display: block; margin: auto;" />
-
-Remove the arrow
-----------------
-
-``` r
-ggpca(Env.pca, group = grl, spearrow = NULL)
-```
-
-<img src="README-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
-
-Modify legend title, group color and point shape
-------------------------------------------------
-
-``` r
-ggpca(Env.pca, group = grl, spearrow = NULL) + 
-  scale_color_manual(name = "Groups",values = c("red2", "purple1", "grey20","cyan")) +
-  scale_shape_manual(name = "Groups",values = c(8,15,16,17))
-```
-
-<img src="README-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
-
-Add confidence ellipses
------------------------
-
-``` r
-ggpca(Env.pca, group = grl, spearrow = NULL, ellipse = TRUE) +
-  scale_colour_hue(l = 70, c = 300)
-```
-
-<img src="README-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
----------------------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-==ggpnmds==
+ggpnmds
 
 Compute NMDS
 ------------
@@ -152,46 +152,51 @@ Env.nmds <- metaMDS(Envs, distance="bray")
 #> Square root transformation
 #> Wisconsin double standardization
 #> Run 0 stress 0.04321381 
-#> Run 1 stress 0.04321623 
-#> ... Procrustes: rmse 0.0004370102  max resid 0.002033296 
+#> Run 1 stress 0.06230658 
+#> Run 2 stress 0.07053414 
+#> Run 3 stress 0.06230556 
+#> Run 4 stress 0.04321529 
+#> ... Procrustes: rmse 0.0003025622  max resid 0.001402955 
 #> ... Similar to previous best
-#> Run 2 stress 0.06230554 
-#> Run 3 stress 0.04321425 
-#> ... Procrustes: rmse 0.0006777623  max resid 0.003159122 
+#> Run 5 stress 0.04321398 
+#> ... Procrustes: rmse 4.274834e-05  max resid 0.0001708074 
 #> ... Similar to previous best
-#> Run 4 stress 0.06230581 
-#> Run 5 stress 0.06230566 
-#> Run 6 stress 0.04321597 
-#> ... Procrustes: rmse 0.0009571874  max resid 0.004465885 
+#> Run 6 stress 0.04321452 
+#> ... Procrustes: rmse 0.0001735734  max resid 0.0008024154 
 #> ... Similar to previous best
-#> Run 7 stress 0.04321508 
-#> ... Procrustes: rmse 0.00025741  max resid 0.001193477 
+#> Run 7 stress 0.04321547 
+#> ... Procrustes: rmse 0.0003388551  max resid 0.001576776 
 #> ... Similar to previous best
-#> Run 8 stress 0.07029839 
-#> Run 9 stress 0.06230485 
-#> Run 10 stress 0.04321484 
-#> ... Procrustes: rmse 0.0007419825  max resid 0.003454613 
+#> Run 8 stress 0.04321397 
+#> ... Procrustes: rmse 0.0006037261  max resid 0.002792442 
 #> ... Similar to previous best
-#> Run 11 stress 0.07053354 
-#> Run 12 stress 0.07547604 
-#> Run 13 stress 0.06230489 
-#> Run 14 stress 0.04321522 
-#> ... Procrustes: rmse 0.0002997219  max resid 0.001401736 
+#> Run 9 stress 0.04321549 
+#> ... Procrustes: rmse 0.0003262406  max resid 0.001512939 
 #> ... Similar to previous best
-#> Run 15 stress 0.06230581 
-#> Run 16 stress 0.04321402 
-#> ... Procrustes: rmse 7.708914e-05  max resid 0.0003530284 
+#> Run 10 stress 0.04321559 
+#> ... Procrustes: rmse 0.0003580126  max resid 0.001665144 
 #> ... Similar to previous best
-#> Run 17 stress 0.06230519 
-#> Run 18 stress 0.04321463 
-#> ... Procrustes: rmse 0.0001829384  max resid 0.0008390205 
+#> Run 11 stress 0.07547583 
+#> Run 12 stress 0.04321605 
+#> ... Procrustes: rmse 0.0004059887  max resid 0.001888513 
 #> ... Similar to previous best
-#> Run 19 stress 0.04321636 
-#> ... Procrustes: rmse 0.001005531  max resid 0.004693268 
+#> Run 13 stress 0.04321555 
+#> ... Procrustes: rmse 0.0003418451  max resid 0.001591568 
 #> ... Similar to previous best
-#> Run 20 stress 0.04321481 
-#> ... Procrustes: rmse 0.0007868633  max resid 0.003672846 
+#> Run 14 stress 0.04321335 
+#> ... New best solution
+#> ... Procrustes: rmse 0.0003103914  max resid 0.00144304 
 #> ... Similar to previous best
+#> Run 15 stress 0.04321542 
+#> ... Procrustes: rmse 0.0006436892  max resid 0.002997833 
+#> ... Similar to previous best
+#> Run 16 stress 0.04321534 
+#> ... Procrustes: rmse 0.0005629089  max resid 0.002629245 
+#> ... Similar to previous best
+#> Run 17 stress 0.06972164 
+#> Run 18 stress 0.06230484 
+#> Run 19 stress 0.07053087 
+#> Run 20 stress 0.07780282 
 #> *** Solution reached
 #head(summary(Env.nmds))
 ```
