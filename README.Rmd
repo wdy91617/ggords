@@ -43,6 +43,7 @@ require(ggplot2)
 data(Envs)
 
 ```
+
 ### get group factor
 
 ```{r} 
@@ -51,6 +52,9 @@ Env.w <- hclust(dist(scale(Envs)), "ward.D")
 gr <- cutree(Env.w , k=4)
 grl <- factor(gr)
 ```
+
+==ggpca==
+
 ### Compute PCA
 
 ```{r} 
@@ -80,9 +84,9 @@ ggpca(Env.pca, group = grl, spacol = "white") + theme_dark()
 ```
 
 ### Set a theme (use ggthemr packages, more themes in ggthemer)
-
+[](https://github.com/cttobin/ggthemr)
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
-library(ggthemr)#[](https://github.com/cttobin/ggthemr)
+library(ggthemr)
 
 chalk_theme <- ggthemr('chalk', set_theme = FALSE)
 fd_theme <- ggthemr('flat dark', set_theme = FALSE)
@@ -107,15 +111,89 @@ ggpca(Env.pca, group = grl, spearrow = NULL) +
 
 ```
 
-##Add confidence ellipses
+## Add confidence ellipses
 
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
 ggpca(Env.pca, group = grl, spearrow = NULL, ellipse = TRUE) +
   scale_colour_hue(l = 70, c = 300)
 
 ```
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+
+==ggpnmds==
+
+## Compute NMDS
+
+```{r} 
+Env.nmds <- metaMDS(Envs, distance="bray")
+#head(summary(Env.nmds))
+```
+
+## Produce a plot 
+
+```{r} 
+ggnmds(Env.nmds)
+```
+
+## Add a group
+
+```{r} 
+ggnmds(Env.nmds, group = grl) 
+```
+
+## Set a theme 
+
+```{r} 
+ggnmds(Env.nmds, group = grl, spacol = "white") + theme_dark()
+
+```
+
+## Set a theme (use ggthemr packages, more themes in ggthemer)
+[](https://github.com/cttobin/ggthemr)
+
+```{r} 
+
+library(ggthemr)
+
+chalk_theme <- ggthemr('chalk', set_theme = FALSE)
+fd_theme <- ggthemr('flat dark', set_theme = FALSE)
+
+p <- ggnmds(Env.nmds, group = grl, spacol = "white")
+p + chalk_theme$theme
+p + fd_theme$theme
+```
 
 
+## Remove the arrow
+
+```{r} 
+ggnmds(Env.nmds, group = grl, spearrow = NULL)
+```
+
+## Set labels
+
+```{r} 
+mlabs<-c("NH[4]^{`+`}" , "NO[3]^{`-`}" ,"delta^13*C","A[1]","sqrt(2*pi)","frac(x^2,2)",
+         "sin(x)","hat(x)","bar(xy)","90*degree","x^{y+z}")
+
+ggnmds(Env.nmds, group = grl, spearrow = NULL, msplabs = mlabs)
+```
+
+## Modify legend title, group color and point shape
+
+```{r} 
+ggnmds(Env.nmds, group = grl, spearrow = NULL) + 
+  scale_color_manual(name = "Groups",values = c("red2", "purple1", "grey20","cyan")) +
+  scale_shape_manual(name = "Groups",values = c(8,15,16,17))
+```
+
+## Add confidence ellipses
+
+```{r} 
+ggnmds(Env.nmds, group = grl, spearrow = NULL, ellipse = TRUE) +
+  scale_colour_hue(l = 70, c = 300)
+```
 
 License
 -------
