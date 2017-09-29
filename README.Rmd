@@ -40,8 +40,9 @@ require(ggplot2)
 data(Envs)
 
 ```
+## ggpca
 
-### get group factor
+* get group factor
 
 ```{r} 
 
@@ -50,37 +51,36 @@ gr <- cutree(Env.w , k=4)
 grl <- factor(gr)
 ```
 
-## ggpca
 
-### Compute PCA
+* Compute PCA
 
 ```{r} 
 Env.pca <- rda(Envs,scale = TRUE)
 #head(summary(Env.pca))
 ```
 
-### Produce a plot 
+* Produce a plot 
 
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
 ggpca(Env.pca)
 
 ```
 
-### Add a group
+* Add a group
 
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"}  
 ggpca(Env.pca, group = grl) 
 
 ```
 
-### Set a theme 
+* Set a theme 
 
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"}  
 ggpca(Env.pca, group = grl, spacol = "white") + theme_dark()
 
 ```
 
-### Set a theme (use ggthemr packages, more themes in ggthemer)
+* Set a theme (use ggthemr packages, more themes in ggthemer)
 [](https://github.com/cttobin/ggthemr)
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
 library(ggthemr)
@@ -93,13 +93,13 @@ p + chalk_theme$theme
 p + fd_theme$theme
 ```
 
-### Remove the arrow
+* Remove the arrow
 
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
 ggpca(Env.pca, group = grl, spearrow = NULL)
 ```
 
-### Modify legend title, group color and point shape
+* Modify legend title, group color and point shape
 
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
 ggpca(Env.pca, group = grl, spearrow = NULL) + 
@@ -108,7 +108,7 @@ ggpca(Env.pca, group = grl, spearrow = NULL) +
 
 ```
 
-### Add confidence ellipses
+* Add confidence ellipses
 
 ```{r fig.width=5, fig.height=4.5, fig.align = "center"} 
 ggpca(Env.pca, group = grl, spearrow = NULL, ellipse = TRUE) +
@@ -119,36 +119,36 @@ ggpca(Env.pca, group = grl, spearrow = NULL, ellipse = TRUE) +
 
 ## ggpnmds
 
-### Compute NMDS
+* Compute NMDS
 
 ```{r} 
 Env.nmds <- metaMDS(Envs, distance="bray")
 #head(summary(Env.nmds))
 ```
 
-### Produce a plot 
+* Produce a plot 
 
-```{r} 
+```{r fig.width=5, fig.height=4.5, fig.align = "center"}  
 ggnmds(Env.nmds)
 ```
 
-### Add a group
+* Add a group
 
-```{r} 
+```{r fig.width=5, fig.height=4.5, fig.align = "center"}  
 ggnmds(Env.nmds, group = grl) 
 ```
 
-### Set a theme 
+* Set a theme 
 
-```{r} 
+```{r fig.width=5, fig.height=4.5, fig.align = "center"}  
 ggnmds(Env.nmds, group = grl, spacol = "white") + theme_dark()
 
 ```
 
-### Set a theme (use ggthemr packages, more themes in ggthemer)
+* Set a theme (use ggthemr packages, more themes in ggthemer)
 [](https://github.com/cttobin/ggthemr)
 
-```{r} 
+```{r fig.width=5, fig.height=4.5, fig.align = "center"}  
 
 library(ggthemr)
 
@@ -161,32 +161,32 @@ p + fd_theme$theme
 ```
 
 
-### Remove the arrow
+* Remove the arrow
 
-```{r} 
+```{r fig.width=5, fig.height=4.5, fig.align = "center"}  
 ggnmds(Env.nmds, group = grl, spearrow = NULL)
 ```
 
-### Set labels
+* Set labels
 
-```{r} 
+```{r fig.width=5, fig.height=4.5, fig.align = "center"}  
 mlabs<-c("NH[4]^{`+`}" , "NO[3]^{`-`}" ,"delta^13*C","A[1]","sqrt(2*pi)","frac(x^2,2)",
          "sin(x)","hat(x)","bar(xy)","90*degree","x^{y+z}")
 
 ggnmds(Env.nmds, group = grl, spearrow = NULL, msplabs = mlabs)
 ```
 
-### Modify legend title, group color and point shape
+* Modify legend title, group color and point shape
 
-```{r} 
+```{r fig.width=5, fig.height=4.5, fig.align = "center"}  
 ggnmds(Env.nmds, group = grl, spearrow = NULL) + 
   scale_color_manual(name = "Groups",values = c("red2", "purple1", "grey20","cyan")) +
   scale_shape_manual(name = "Groups",values = c(8,15,16,17))
 ```
 
-### Add confidence ellipses
+* Add confidence ellipses
 
-```{r} 
+```{r fig.width=5, fig.height=4.5, fig.align = "center"}  
 ggnmds(Env.nmds, group = grl, spearrow = NULL, ellipse = TRUE) +
   scale_colour_hue(l = 70, c = 300)
 ```
