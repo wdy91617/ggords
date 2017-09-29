@@ -115,7 +115,7 @@ ggpca(Env.pca, group = grl, spearrow = NULL, ellipse = TRUE) +
   scale_colour_hue(l = 70, c = 300)
 
 ```
-------------------------------------------------------------------------------------------------
+
 
 ## ggpnmds
 
