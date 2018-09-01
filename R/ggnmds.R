@@ -200,8 +200,8 @@ ggnmds <- function(ord,groups = NULL, axes = c(1,2), obslab = FALSE, moblabs = N
 		  fangles <- with(fits, (180/pi) * atan(NMDS2 / NMDS1))
 		  fhjusts <- with(fits, (1 - frotate * sign(NMDS1)) / 2)
 		} else {
-		  angles<-rep(0,nrow(fits))
-		  hjusts<-rep(0.5,nrow(fits))
+		  fangles<-rep(0,nrow(fits))
+		  fhjusts<-rep(0.5,nrow(fits))
 		}
 		##########################################################
 		# if(!is.null(fover)){
